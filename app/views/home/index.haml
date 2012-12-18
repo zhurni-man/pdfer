@@ -1,0 +1,35 @@
+-content_for :sidebar do
+  - unless current_agent
+    %h2.page-header Search for Agent
+    %form.form-search(action="/agent/search" method="GET")
+      %input.input-xlarge.search-query(type="text" name="search" placeholder="example: 14, Jones, John Smith")
+      %button.btn(type="submit") Search
+%h4.page-header Recent uploads
+#recent-uploads
+  %table(class='table table-hover table-striped simpleTable')
+    %thead
+      %tr
+        %th Agent
+        %th Filename
+        %th Listing ID
+        %th Uploaded On
+    -@uploads.each do |upload|
+      %tr
+        %td
+          %a{ :href => "http://intranet.propertyline.com/agent/profile/#{upload.agent_id}", :target => "_blank" }
+            =agent_name(upload.agent_id)
+        %td
+          %a{ :href => "/upload/#{upload.id}" }
+            =upload.fileName
+        %td
+          - if upload.listing_id
+            %a{ :href => "http://www.propertyline.com/listing/preview/?=#{upload.listing_id}", :target => "_blank" }
+            %a{ :href => "/listing/#{upload.listing_id}" }
+              =agent_listing_name(upload.listing_id)
+          - else
+            %span No listing created.
+        %td
+          %span
+            =upload.created_at ? upload.created_at.strftime("%B %d %Y") : "No date"
+  .digg_pagination.pull-right
+    = will_paginate @uploads

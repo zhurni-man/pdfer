@@ -1,0 +1,38 @@
+!!! 5
+%html(lang="en")
+  %head
+    %meta{:charset => "utf-8"}
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1"}
+    %title= content_for?(:title) ? yield(:title) : "Myapp"
+    %meta{:content => "", :name => "description"}
+    %meta{:content => "", :name => "author"}
+    = stylesheet_link_tag "app", :media => "all"
+    = javascript_include_tag ["jquery", "jquery-ujs", "http://code.jquery.com/ui/1.9.2/jquery-ui.js", "bootstrap.min", "stupidtable.min", "jquery.iviewer", "zoomify", "dragdrop", "application"]
+    :javascript
+      $(function() {
+        $("#page-pane").draggable();
+      });
+  %body
+    .row-fluid
+      .navbar.navbar-static-top.navbar-inverse
+        .navbar-inner
+          %a(class="brand" href="#") PDF Automator
+          %ul.nav.pull-right
+            %li
+              %a(href="/")Home
+            %li
+              %a(href="http://intranet.propertyline.com")intranet
+    - if current_agent
+      #current-user.row-fluid
+        #user-info.span6.pad20
+          =partial 'partials/agent_info'
+        #user-search.span6.pad20
+          =partial 'partials/agent_search'
+    #content.container-fluid
+      .row-fluid
+        .span6
+          = flash_tag(:notice, :class => "alert alert-info") if flash[:notice]
+          = flash_tag(:error, :class => "alert alert-error") if flash[:error]
+          = yield
+        .span6
+          = yield_content :sidebar

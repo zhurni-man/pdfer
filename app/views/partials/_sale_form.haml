@@ -1,0 +1,77 @@
+- form_for @listing, '/listing/create', :id => 'new_listing', :class => "form-horizontal" do |f|
+	= f.error_messages
+	%fieldset
+		%legend General Information
+		= f.hidden_field(:agent_id, :class => "hidden", :value => current_agent.id)
+		.control-group.pull-right
+			= f.label :property_name, :class => "control-label"
+			.controls
+				= f.text_field :property_name, :class => "droppable input-xlarge", :placeholder => "Property Name"
+		.control-group.pull-right
+			= f.label :building_sf, :class => "control-label"
+			.controls
+				= f.text_field :building_sf, :class => "droppable input-xlarge", :placeholder => "Building SF"
+		.control-group.pull-right
+			= f.label :number_buildings, :class => "control-label"
+			.controls
+				= f.text_field :number_buildings, :class => "droppable input-xlarge", :placeholder => "No. of buildings"
+		.control-group.pull-right
+			= f.label :number_units, :class => "control-label"
+			.controls
+				= f.text_field :number_units, :class => "droppable input-xlarge", :placeholder => "No. of units"
+	%fieldset
+		%legend Location
+		.control-group.pull-right
+			= f.label :addr_street, :class => "control-label", :caption => "Address"
+			.controls
+				= f.text_field :addr_street, :class => "droppable input-xlarge", :placeholder => "Street Address"
+		.control-group.pull-right
+			= f.label :addr_city, :class => "control-label", :caption => "City"
+			.controls
+				= f.text_field :addr_city, :class => "droppable input-xlarge", :placeholder => "City"
+		.control-group.pull-right
+			= f.label :addr_state, :class => "control-label", :caption => "State"
+			.controls
+				= f.text_field :addr_state, :class => "droppable input-xlarge", :placeholder => "State"
+		.control-group.pull-right
+			= f.label :addr_zip, :class => "control-label", :caption => "Zip code"
+			.controls
+				= f.text_field :addr_zip, :class => "droppable input-xlarge", :placeholder => "Postal Code"
+	%fieldset
+		%legend Pricing
+		.control-group.pull-right
+			= f.label :list_price, :class => "control-label"
+			.controls
+				= f.text_field :list_price, :class => "droppable input-xlarge", :placeholder => "List Price"
+		.control-group.pull-right
+			= f.label :commission, :class => "control-label"
+			.controls
+				= f.text_field :commission, :class => "droppable input-xlarge", :placeholder => "Commission"
+		.control-group.pull-right
+			= f.label :commission_comments, :class => "control-label"
+			.controls
+				= f.text_field :commission_comments, :class => "droppable input-xlarge", :placeholder => "Commission comments"
+	%fieldset
+		%legend Features
+		.control-group.pull-right
+			= f.text_field :feature_1, :class => "droppable input-xxlarge", :placeholder => "Feature 1"
+		.control-group.pull-right
+			= f.text_field :feature_2, :class => "droppable input-xxlarge", :placeholder => "Feature 2"
+		.control-group.pull-right
+			= f.text_field :feature_3, :class => "droppable input-xxlarge", :placeholder => "Feature 3"
+		.control-group.pull-right
+			= f.text_field :feature_4, :class => "droppable input-xxlarge", :placeholder => "Feature 4"
+		.control-group.pull-right
+			= f.text_field :feature_5, :class => "droppable input-xxlarge", :placeholder => "Feature 5"
+		.control-group.pull-right
+			= f.text_field :feature_6, :class => "droppable input-xxlarge", :placeholder => "Feature 6"
+		.control-group.pull-right
+			= f.text_field :feature_7, :class => "droppable input-xxlarge", :placeholder => "Feature 7"
+		.control-group.pull-right
+			= f.text_field :feature_8, :class => "droppable input-xxlarge", :placeholder => "Feature 8"
+		.control-group.pull-right
+			= f.text_field :feature_9, :class => "droppable input-xxlarge", :placeholder => "Feature 9"
+		.control-group.pull-right
+			= f.text_field :feature_10, :class => "droppable input-xxlarge", :placeholder => "Feature 10"
+	.form-actions
+		= f.submit_block "Create", :class => "btn btn-primary"

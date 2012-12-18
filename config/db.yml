@@ -1,0 +1,6 @@
+adapter: mysql2
+database: pl
+username: root
+password: ta!tDurl4
+host: quelle.propertyline.com
+port: 3306

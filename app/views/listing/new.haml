@@ -1,0 +1,15 @@
+%ul(class="nav nav-tabs")
+  %li
+    %a{:href => "/upload/#{current_upload.id}?file=/mnt/pdfprocess/#{current_agent.id}/#{current_upload.fileName}"}Text
+  %li
+    %a{:href => "/upload/#{current_upload.id}?file=/mnt/pdfprocess/#{current_agent.id}/#{current_upload.fileName}&page="}View
+-if @s
+  #output
+    -@s.each do |line|
+      .alert
+        =line
+-if @uploaded_pdf
+  %iframe{ :allowscriptaccess => 'always', :allowFullScreen => 'false', :frameborder => '0', :height => '780', :width => '100%', :src => "http://docs.google.com/viewer?url=http%3A%2F%2Ffiles.propertyline.com%2Fpdfprocess%2F#{@agent.id}%2F#{File.basename(@uploaded_pdf)}&embedded=true" }
+
+- content_for :sidebar do
+  = partial 'partials/sale_form'

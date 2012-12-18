@@ -1,0 +1,73 @@
+@import url(bootstrap.min.css);
+@import url(bootstrap-responsive.min.css);
+@import url(zoomify.css);
+@import url(pagination.css);
+#content {
+  margin-top: 40px; }
+
+#agent-info {
+  margin: 0 0 30px 0;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eeeeee; }
+
+#agent-info ul {
+  list-style: none; }
+
+dt {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid #eeeeee; }
+
+dt:first-child {
+  margin-top: 0;
+  border: none;
+  padding-top: 0; }
+
+th {
+  background: #555555;
+  color: #ffffff; }
+
+.dragga {
+  background: #b5b5b5; }
+
+.swag {
+  display: inline-block; }
+
+#image-zoom-wrapper {
+  background: #ededed;
+  border: none; }
+
+#output {
+  max-height: 600px;
+  overflow: auto; }
+
+#output-imgs {
+  max-height: 600px;
+  overflow: auto; }
+
+#current-user {
+  background: #ededed; }
+
+.pad20 {
+  padding: 20px; }
+
+#field-errors h2 {
+  font-size: 18px;
+  color: #B94A48; }
+
+#field-errors li {
+  font-weight: bold;
+  color: #B94A48; }
+
+input.ui-state-active {
+  background: #ededed; }
+
+legend {
+  font-size: 17px; }
+
+form#new_listing {
+  max-height: 800px;
+  overflow: auto; }
+
+fieldset {
+  padding-right: 20px; }

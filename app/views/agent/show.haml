@@ -1,0 +1,28 @@
+- content_for :sidebar do
+  -if @uploads.count > 0
+    %h4(class="page-header") Recent Uploads
+    #recent-uploads
+      %table(class='table table-hover table-striped simpleTable')
+        %thead
+          %tr
+            %th(data-sort="int") Uploaded
+            %th Listing
+            %th Filename
+        - @uploads.each do |upload|
+          %tr
+            %td
+              =upload.created_at ? upload.created_at.strftime("%B %d, %Y") : "No upload date."
+            %td
+              - if upload.listing_id
+                %a{ :href => "/listing/#{upload.listing_id}" }
+                  = agent_listing_name(upload.listing_id)
+              - else
+                %span No listing created.
+            %td
+              %a{ :href => "/upload/#{upload.id}" }
+                =truncate(upload.fileName, :length => 30)
+#upload-section
+  %h4 Upload PDF file
+  %form(action="/upload" method="post" enctype="multipart/form-data" class="form-inline")
+    %input(type="file" class="file_input_hidden input-xxlarge" name="myfile" id="uploadr")
+    %input(type="submit" value="Upload" class="btn btn-primary expand postfix")

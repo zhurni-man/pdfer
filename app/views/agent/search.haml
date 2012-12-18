@@ -1,0 +1,17 @@
+%h4(class="page-header") Search Results
+%table(class='table table-hover table-striped')
+  %thead
+    %tr
+      %th user id
+      %th Name
+      %th Company
+  %tbody
+  - @results.each do |result|
+    %tr
+      %td
+        =result.id
+      %td
+        %a(href="/agent/#{result.id}")
+          =result.name_first + ' ' + result.name_last
+      %td
+        =result.company ? result.company.name : '-'

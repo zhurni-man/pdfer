@@ -1,0 +1,12 @@
+%h4
+  %a{ :href => "/agent/#{current_agent.id}" }
+    =current_agent.name_first + " " + current_agent.name_last
+%address
+  - if current_agent.company
+    =current_agent.company.name
+    %br
+  =current_agent.email if current_agent.email
+  %br
+  =current_agent.contact_phone if current_agent.contact_phone
+  %br
+  =current_agent.pl_fax if current_agent.pl_fax
