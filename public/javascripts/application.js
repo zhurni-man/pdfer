@@ -1,3 +1,3 @@
 $(document).ready(function() {
-	$("#page-pane").draggable();
+	$(".draggable-photo").draggable();
 });

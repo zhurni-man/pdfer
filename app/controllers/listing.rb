@@ -34,8 +34,8 @@ Pdfupper.controllers :listing do
   post :create do
     @listing = Listing.new(params[:listing])
     @agent = current_agent
-    @upload = Upload.where(_id: current_upload.id).update(listing_id: @listing.id)
     if @listing.save
+      @upload = Upload.where(_id: current_upload.id).update(listing_id: @listing.id)
       flash[:notice] = "Listing has been created. An email has been sent to #{@agent.email} to verify."
       redirect url(:listing, :show, :id => @listing.id)
     else

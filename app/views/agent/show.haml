@@ -21,8 +21,4 @@
             %td
               %a{ :href => "/upload/#{upload.id}" }
                 =truncate(upload.fileName, :length => 30)
-#upload-section
-  %h4 Upload PDF file
-  %form(action="/upload" method="post" enctype="multipart/form-data" class="form-inline")
-    %input(type="file" class="file_input_hidden input-xxlarge" name="myfile" id="uploadr")
-    %input(type="submit" value="Upload" class="btn btn-primary expand postfix")
+= partial 'partials/upload_file'

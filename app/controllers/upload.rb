@@ -25,6 +25,7 @@ Pdfupper.controllers :upload do
   get :show, :map => '/upload/:id' do
     @upload = Upload.find(params[:id])
     @agent = Agent.find(@upload.agent_id)
+    session['agent_id'] = @agent.id
     session['upload_id'] = @upload.id
     if @upload.listing_id
       @listing = Listing.find(@upload.listing_id)
@@ -39,8 +40,11 @@ Pdfupper.controllers :upload do
         #Docsplit.extract_images(uploaded_pdf, :size => '1500x', :format => :jpg, :output => "/mnt/pdfprocess/#{@agent.id}/thumbs/")
         #@imgs = Dir.glob("/mnt/pdfprocess/#{@agent.id}/thumbs/#{File.basename(uploaded_pdf, '.pdf')}_*.jpg")
         @uploaded_pdf = uploaded_pdf
+      elsif params[:img]
+        @extracted_imgs = Dir.glob("/mnt/pdfprocess/#{@agent.id}/images/#{@upload.id}-*.jpg")
+        # DO THAT CONVERTING THING HERE, REMEMBER
       else
-        Docsplit.extract_text(uploaded_pdf, :output => "/mnt/pdfprocess/#{@agent.id}/")
+        Docsplit.extract_text(uploaded_pdf, :ocr => false, :output => "/mnt/pdfprocess/#{@agent.id}/")
         fileline = File.readlines(uploaded_pdf.gsub(/\.[^.]*$/, ".txt"))
         @s = fileline.reject {|x| x == "\n" || x == "\f" }
       end
@@ -72,8 +76,9 @@ Pdfupper.controllers :upload do
     else
       user = session['agent_id']
       user_dir = MNT_DIR + user.to_s + '/'
-      unless File.exists? File.expand_path(user_dir)
-        Dir.mkdir(user_dir, 0777)
+      user_img_dir = user_dir + "images"
+      unless File.exists? File.expand_path(user_img_dir)
+        FileUtils.mkdir_p(user_img_dir)
       end
       #bname = File.basename(unique(params['myfile'][:filename]), ".pdf")
       #file_dir = user_dir + bname + '/'
@@ -90,9 +95,14 @@ Pdfupper.controllers :upload do
             upload = Upload.new
             upload[:agent_id] = user
             upload[:fileName] = File.basename(f)
-            upload.save
-            flash[:notice] = "File uploaded successfully."
-            redirect url(:upload, :show, :id => upload.id, :file => uploaded_file)
+            if upload.save
+              value = `pdfimages -j #{uploaded_file} #{user_img_dir}/#{upload.id}`
+              flash[:notice] = "File uploaded successfully."
+              redirect url(:upload, :show, :id => upload.id, :file => uploaded_file)
+            else
+              flash[:error] = "Error saving uploaded file."
+              redirect url(:home, :index)
+            end
           else
             flash[:error] = "Error: There was a problem uploading the file."
             redirect url(:home, :index)
