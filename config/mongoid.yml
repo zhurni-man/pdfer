@@ -4,3 +4,9 @@ development:
       database: pdfauto_dev
       hosts:
         - localhost:27017
+production:
+  sessions:
+    default:
+      database: pdfer
+      hosts:
+        - localhost:27017
