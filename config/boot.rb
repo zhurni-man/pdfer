@@ -36,8 +36,8 @@ Bundler.require(:default, PADRINO_ENV)
 # Add your before (RE)load hooks here
 #
 Padrino.before_load do
-	Mongoid.load!('config/mongoid.yml', :development)
-	DB_CONFIG = YAML::load(File.open('config/db.yml'))
+	Mongoid.load!('config/mongoid.yml')
+	DB_CONFIG = YAML::load(File.open('config/db.yml'))[PADRINO_ENV]
 	ActiveRecord::Base.establish_connection(DB_CONFIG)
 	#set :database, "mysql://#{DB_CONFIG['username']}:#{DB_CONFIG['password']}@#{DB_CONFIG['host']}:#{DB_CONFIG['port']}/#{DB_CONFIG['database']}"
 end
