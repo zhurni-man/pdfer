@@ -97,6 +97,7 @@ Pdfupper.controllers :upload do
             upload[:fileName] = File.basename(f)
             if upload.save
               value = `pdfimages -j #{uploaded_file} #{user_img_dir}/#{upload.id}`
+              #conv = `convert #{upload.id}-*.ppm #{upload.id}
               flash[:notice] = "File uploaded successfully."
               redirect url(:upload, :show, :id => upload.id, :file => uploaded_file)
             else

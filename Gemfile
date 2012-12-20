@@ -22,6 +22,7 @@ gem 'bootstrap-sass', '~> 2.2.1.1'
 gem 'sinatra-activerecord'
 gem 'scoped_search'
 gem 'json'
+gem 'pony'
 
 #gem 'kaminari', :require => 'kaminari/sinatra'
 gem 'will_paginate', '~> 3.0'

@@ -36,6 +36,39 @@ Pdfupper.controllers :listing do
     @agent = current_agent
     if @listing.save
       @upload = Upload.where(_id: current_upload.id).update(listing_id: @listing.id)
+      case settings.environment
+      when :development
+        body = render 'listing/mail', :layout => false
+        options = {
+          :to => 'jsagisi@propertyline.com',
+          :from => 'tech@propertyline.com',
+          :subject => "Listing Created: #{@listing.id}",
+          :body => 'Test text',
+          :html_body => body,
+          :via => :smtp,
+          :via_options => {
+            :address      => 'mail.propertyline.com',
+            :port         => '25',
+            :domain       => "localhost"
+          }
+        }
+      when :production
+        body = render 'listing/mail', :layout => false
+        options = {
+          :to => @agent.email,
+          :from => 'tech@propertyline.com',
+          :subject => "Listing Created: #{@listing.id}",
+          :body => 'Test text',
+          :html_body => body,
+          :via => :smtp,
+          :via_options => {
+            :address      => 'mail.propertyline.com',
+            :port         => '25',
+            :domain       => "localhost"
+          }
+        }
+      end
+      Pony.mail(options)
       flash[:notice] = "Listing has been created. An email has been sent to #{@agent.email} to verify."
       redirect url(:listing, :show, :id => @listing.id)
     else
