@@ -3,6 +3,7 @@
 	%fieldset
 		%legend General Information
 		= f.hidden_field(:agent_id, :class => "hidden", :value => current_agent.id)
+		= f.hidden_field(:started, :class => "hidden", :value => DateTime.now)
 		.control-group.pull-right
 			.controls
 				= f.select(:property_type, :options => {'Sale' => 1, 'Lease' => 2})
