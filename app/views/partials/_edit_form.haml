@@ -1,8 +1,11 @@
-- form_for @listing, '/listing/create', :id => 'new_listing', :class => "form-horizontal" do |f|
+- form_for @listing, "/listing/#{@listing.id}", :method => 'put', :id => 'edit_listing', :class => "form-horizontal" do |f|
 	= f.error_messages
 	%fieldset
 		%legend General Information
 		= f.hidden_field(:agent_id, :class => "hidden", :value => current_agent.id)
+		.control-group.pull-right
+			.controls
+				= f.select(:property_type, :options => {'Sale' => 1, 'Lease' => 2})
 		.control-group.pull-right
 			= f.label :property_name, :class => "control-label"
 			.controls

@@ -1,3 +1,9 @@
 - content_for :sidebar do
   =partial 'partials/pdf_view'
-= partial 'partials/sale_form'
+= partial 'partials/listing_info'
+- if @upload.listing_id
+  %h4 Edit Listing
+  = partial 'partials/edit_form'
+- else
+  %h4 Create Listing
+  = partial 'partials/new_form'

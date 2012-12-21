@@ -3,14 +3,14 @@ Pdfupper.controllers :listing do
   get :index do
   end
 
-  get :new do
-    @listing = Listing.new
-    render 'listing/new'
-  end
-
   get :show, :map => "/listing/:id" do
     @listing = Listing.find(params[:id])
     render 'listing/show'
+  end
+
+  get :new do
+    @listing = Listing.new
+    render 'listing/new'
   end
 
   post :create do
@@ -60,4 +60,19 @@ Pdfupper.controllers :listing do
     end
   end
 
+  get :edit, :with => :id do
+    @listing = Listing.find(params[:id])
+    render 'listing/edit'
+  end
+
+  put :update, :map => "/listing/:id" do
+    @listing = Listing.find(params[:id])
+    if @listing.update_attributes(params[:listing])
+      flash[:notice] = "Listing has been updated."
+      redirect url(:listing, :show, :id => @listing.id)
+    else
+      flash[:error] = "There was an error updating."
+      render 'upload/show'
+    end
+  end
 end
