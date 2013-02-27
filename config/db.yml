@@ -1,23 +1,23 @@
 development:
   adapter: mysql2
   database: pl
-  username: root
-  password: ta!tDurl4
+  username: username
+  password: password
   host: quelle.propertyline.com
   port: 3306
 
 production:
   adapter: mysql2
   database: pl
-  username: plapps
-  password: ta!tDurl4
+  username: username
+  password: password
   host: 192.168.1.231
   port: 3306
 
 test:
   adapter: mysql2
   database: pl
-  username: plapps
-  password: ta!tDurl4
+  username: username
+  password: password
   host: quelle.propertyline.com
   port: 3306
