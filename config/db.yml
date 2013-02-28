@@ -3,7 +3,7 @@ development:
   database: pl
   username: username
   password: password
-  host: quelle.propertyline.com
+  host: 
   port: 3306
 
 production:
@@ -11,7 +11,7 @@ production:
   database: pl
   username: username
   password: password
-  host: 192.168.1.231
+  host: 
   port: 3306
 
 test:
@@ -19,5 +19,5 @@ test:
   database: pl
   username: username
   password: password
-  host: quelle.propertyline.com
+  host: 
   port: 3306
